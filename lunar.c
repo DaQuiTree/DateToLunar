@@ -1,6 +1,7 @@
 #include <config.h>
 #include <lcd12864.h>
  
+uint32 code LunarCalendarTable[99] =  
 {    
     0x4D4AB8,0x0D4A4C,0x0DA541,0x25AAB6,0x056A49,0x7AADBD,0x025D52,0x092D47,0x5C95BA,0x0A954E,/*2001-2010*/  
     0x0B4A43,0x4B5537,0x0AD54A,0x955ABF,0x04BA53,0x0A5B48,0x652BBC,0x052B50,0x0A9345,0x474AB9,/*2011-2020*/  
@@ -18,22 +19,22 @@ uint32 code MonthAdd[12] = {0,31,59,90,120,151,181,212,243,273,304,334};
  
 uint16 code ChDay[31][2] = {
 {0x0000,0x0000},{0xB3F5,0xD2BB},{0xB3F5,0xB6FE},{0xB3F5,0xC8FD},{0xB3F5,0xCBC4},{0xB3F5,0xCEE5},
-				{0xB3F5,0xC1F9},{0xB3F5,0xC6DF},{0xB3F5,0xB0CB},{0xB3F5,0xBEC5},{0xB3F5,0xCAAE},//ï¿½ï¿½Ò»~ï¿½ï¿½Ê®
+				{0xB3F5,0xC1F9},{0xB3F5,0xC6DF},{0xB3F5,0xB0CB},{0xB3F5,0xBEC5},{0xB3F5,0xCAAE},//³õÒ»~³õÊ®
 				{0xCAAE,0xD2BB},{0xCAAE,0xB6FE},{0xCAAE,0xC8FD},{0xCAAE,0xCBC4},{0xCAAE,0xCEE5},
-				{0xCAAE,0xC1F9},{0xCAAE,0xC6DF},{0xCAAE,0xB0CB},{0xCAAE,0xBEC5},{0xB6FE,0xCAAE},//Ê®Ò»~ï¿½ï¿½Ê®
+				{0xCAAE,0xC1F9},{0xCAAE,0xC6DF},{0xCAAE,0xB0CB},{0xCAAE,0xBEC5},{0xB6FE,0xCAAE},//Ê®Ò»~¶şÊ®
 				{0xD8A5,0xD2BB},{0xD8A5,0xB6FE},{0xD8A5,0xC8FD},{0xD8A5,0xCBC4},{0xD8A5,0xCEE5},
-				{0xD8A5,0xC1F9},{0xD8A5,0xC6DF},{0xD8A5,0xB0CB},{0xD8A5,0xBEC5},{0xC8FD,0xCAAE},//Ø¥Ò»~ï¿½ï¿½Ê®
+				{0xD8A5,0xC1F9},{0xD8A5,0xC6DF},{0xD8A5,0xB0CB},{0xD8A5,0xBEC5},{0xC8FD,0xCAAE},//Ø¥Ò»~ÈıÊ®
 	};
 	                          
 uint16 code ChMonth[] = {
 	0x0000,0xD5FD,0xB6FE,0xC8FD,0xCBC4,0xCEE5,
 	0xC1F9,0xC6DF,0xB0CB,0xBEC5,0xCAAE,0xB6AC,0xC0B0
-};//ï¿½ï¿½ï¿½Âµï¿½ï¿½ï¿½ï¿½ï¿½
+};//ÕıÔÂµ½À°ÔÂ
 
 uint16  code ChAnimal[] = {
 	0xCAF3,0xC5A3,0xBBA2,0xCDC3,0xC1FA,0xC9DF,
 	0xC2ED,0xD1F2,0xBAEF,0xBCA6,0xB9B7,0xD6ED
-};		//{"ï¿½ï¿½","Å£","ï¿½ï¿½","ï¿½ï¿½","ï¿½ï¿½","ï¿½ï¿½","ï¿½ï¿½","ï¿½ï¿½","ï¿½ï¿½","ï¿½ï¿½","ï¿½ï¿½","ï¿½ï¿½"}
+};		//{"Êó","Å£","»¢","ÍÃ","Áú","Éß","Âí","Ñò","ºï","¼¦","¹·","Öí"}
 
 uint32 LunarCalendarDay;
 bit animalNewYear; 
@@ -42,8 +43,8 @@ bit LunarCalendar(uint32 year,int32 month,int32 day)
 {  
     int32 Spring_NY,Sun_NY,StaticDayCount;  
     int32 index,flag;  
-    //Spring_NY ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ëµ±ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
-    //Sun_NY ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ëµ±ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
+    //Spring_NY ¼ÇÂ¼´º½ÚÀëµ±ÄêÔªµ©µÄÌìÊı¡£  
+    //Sun_NY ¼ÇÂ¼ÑôÀúÈÕÀëµ±ÄêÔªµ©µÄÌìÊı¡£  
     if ( ((LunarCalendarTable[year-1901] & 0x0060) >> 5) == 1)  
         Spring_NY = (LunarCalendarTable[year-1901] & 0x001F) - 1;  
     else  
@@ -51,11 +52,11 @@ bit LunarCalendar(uint32 year,int32 month,int32 day)
     Sun_NY = MonthAdd[month-1] + day - 1;  
     if ( (!(year % 4)) && (month > 2))  
         Sun_NY++;  
-    //StaticDayCountï¿½ï¿½Â¼ï¿½ï¿½Ğ¡ï¿½Âµï¿½ï¿½ï¿½ï¿½ï¿½ 29 ï¿½ï¿½30  
-    //index ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½Â¿ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ã¡£  
-    //flag ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½ï¿½ï¿½ï¿½â´¦ï¿½ï¿½  
-    //ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½Ç´ï¿½ï¿½Úºï¿½  
-    if (Sun_NY >= Spring_NY)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½Úºó£¨ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì£©  
+    //StaticDayCount¼ÇÂ¼´óĞ¡ÔÂµÄÌìÊı 29 »ò30  
+    //index ¼ÇÂ¼´ÓÄÄ¸öÔÂ¿ªÊ¼À´¼ÆËã¡£  
+    //flag ÊÇÓÃÀ´¶ÔÈòÔÂµÄÌØÊâ´¦Àí¡£  
+    //ÅĞ¶ÏÑôÀúÈÕÔÚ´º½ÚÇ°»¹ÊÇ´º½Úºó  
+    if (Sun_NY >= Spring_NY)//ÑôÀúÈÕÔÚ´º½Úºó£¨º¬´º½ÚÄÇÌì£©  
     {  
 		animalNewYear = 1;
         Sun_NY -= Spring_NY;  
@@ -85,7 +86,7 @@ bit LunarCalendar(uint32 year,int32 month,int32 day)
         }  
         day = Sun_NY + 1;  
     }  
-    else //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½Ç°  
+    else //ÑôÀúÈÕÔÚ´º½ÚÇ°  
     {  
 		animalNewYear = 0;
         Spring_NY -= Sun_NY;  
@@ -141,7 +142,7 @@ uint8 GetLunarDate(uint32 year, uint32 month, uint32 day, uint16 *lunarDate)
 	aniPos = (year - 1900)%12;
 	if(animalNewYear)
 	{
-		lunarDate[i++] = ChAnimal[aniPos]; //ï¿½ï¿½ï¿½Ë´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		lunarDate[i++] = ChAnimal[aniPos]; //¹ıÁË´º½ÚÊôÏà¼ÆËã
 	}else{
 		if(aniPos == 0) 
 		{
@@ -149,7 +150,7 @@ uint8 GetLunarDate(uint32 year, uint32 month, uint32 day, uint16 *lunarDate)
 		}else{
 			aniPos--;
 		}
-		lunarDate[i++] = ChAnimal[aniPos]; //Î´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		lunarDate[i++] = ChAnimal[aniPos]; //Î´¹ı´º½ÚÊôÏà¼ÆËã
 	}
 	
 	return i;
