@@ -1,0 +1,39 @@
+C51 COMPILER V8.08   MAIN                                                                  05/28/2017 16:21:47 PAGE 1   
+
+
+C51 COMPILER V8.08, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include "config.h"
+   2          #include "lcd12864.h"
+   3          #include "lunar.h"      
+   4          
+   5          void main()
+   6          {
+   7   1              uint16 lunar[8];
+   8   1              uint8 len;
+   9   1      
+  10   1              InitLCD12864();
+  11   1              len = GetLunarDate(33,3,12,lunar);
+  12   1              LCDShowCN(0,0,lunar,len); 
+  13   1      
+  14   1              while(1);
+  15   1      }
+  16          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     37    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      16
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
