@@ -1,0 +1,558 @@
+BL51 BANKED LINKER/LOCATER V6.05                                                        05/28/2017  16:21:48  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.05, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE main.obj, LCD12864.obj, lunar.obj TO Driver
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  main.obj (MAIN)
+  LCD12864.obj (LCD12864)
+  lunar.obj (LUNAR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?ILDPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?ISTOPTR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?ULCMP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?ULSHR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?SLSHR)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?LLDCODE)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?LLDCODE0)
+  C:\KEIL\C51\LIB\C51S.LIB (?C?OFFXADD)
+
+
+LINK MAP OF MODULE:  Driver (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0004H     UNIT         ?DT?LUNAR
+            DATA    000CH     0003H     UNIT         ?DT?_LCDSHOWIMAGE?LCD12864
+                    000FH     0011H                  *** GAP ***
+            BIT     0020H.0   0000H.1   UNIT         ?BI?LUNAR
+                    0020H.1   0000H.7                *** GAP ***
+            DATA    0021H     0021H     UNIT         _DATA_GROUP_
+            IDATA   0042H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     034FH     UNIT         ?PR?_LUNARCALENDAR?LUNAR
+            CODE    0352H     026AH     UNIT         ?CO?LUNAR
+            CODE    05BCH     0166H     UNIT         ?PR?_GETLUNARDATE?LUNAR
+            CODE    0722H     012AH     UNIT         ?C?LIB_CODE
+            CODE    084CH     0081H     UNIT         ?PR?_LCDSHOWIMAGE?LCD12864
+            CODE    08CDH     004DH     UNIT         ?PR?_LCDSHOWCN?LCD12864
+            CODE    091AH     002BH     UNIT         ?PR?_LCDSETCURSOR?LCD12864
+            CODE    0945H     0025H     UNIT         ?PR?MAIN?MAIN
+            CODE    096AH     0022H     UNIT         ?PR?_LCDSHOWSTR?LCD12864
+            CODE    098CH     001EH     UNIT         ?PR?INITLCD12864?LCD12864
+            CODE    09AAH     0019H     UNIT         ?PR?LCDCLEARALL?LCD12864
+            CODE    09C3H     0016H     UNIT         ?PR?_LCDWRITEDATA?LCD12864
+            CODE    09D9H     0012H     UNIT         ?PR?LCDWAITREADY?LCD12864
+            CODE    09EBH     0010H     UNIT         ?PR?_LCDWRITECMD?LCD12864
+            CODE    09FBH     000CH     UNIT         ?C_C51STARTUP
+            CODE    0A07H     0005H     UNIT         ?PR?LCDSHOWCURSOR?LCD12864
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:21:48  PAGE 2
+
+
+            CODE    0A0CH     0005H     UNIT         ?PR?LCDCANCELCURSOR?LCD12864
+            CODE    0A11H     0002H     UNIT         ?CO?LCD12864
+
+
+
+OVERLAY MAP OF MODULE:   Driver (MAIN)
+
+
+SEGMENT                                DATA_GROUP 
+  +--> CALLED SEGMENT                START    LENGTH
+----------------------------------------------------
+?C_C51STARTUP                        -----    -----
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN                        0021H    0010H
+  +--> ?PR?INITLCD12864?LCD12864
+  +--> ?PR?_GETLUNARDATE?LUNAR
+  +--> ?PR?_LCDSHOWCN?LCD12864
+
+?PR?INITLCD12864?LCD12864            -----    -----
+  +--> ?PR?_LCDWRITECMD?LCD12864
+  +--> ?CO?LCD12864
+  +--> ?PR?_LCDSHOWSTR?LCD12864
+
+?PR?_LCDWRITECMD?LCD12864            -----    -----
+  +--> ?PR?LCDWAITREADY?LCD12864
+
+?PR?_LCDSHOWSTR?LCD12864             0031H    0006H
+  +--> ?PR?_LCDSETCURSOR?LCD12864
+  +--> ?PR?_LCDWRITEDATA?LCD12864
+
+?PR?_LCDSETCURSOR?LCD12864           -----    -----
+  +--> ?PR?_LCDWRITECMD?LCD12864
+
+?PR?_LCDWRITEDATA?LCD12864           -----    -----
+  +--> ?PR?LCDWAITREADY?LCD12864
+
+?PR?_GETLUNARDATE?LUNAR              0031H    0007H
+  +--> ?PR?_LUNARCALENDAR?LUNAR
+  +--> ?CO?LUNAR
+
+?PR?_LUNARCALENDAR?LUNAR             0038H    000AH
+  +--> ?CO?LUNAR
+
+?PR?_LCDSHOWCN?LCD12864              0031H    0006H
+  +--> ?PR?_LCDSETCURSOR?LCD12864
+  +--> ?PR?_LCDWRITEDATA?LCD12864
+
+
+
+SYMBOL TABLE OF MODULE:  Driver (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:21:48  PAGE 3
+
+
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  C:0945H         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  -------         DO            
+  D:0021H         SYMBOL        lunar
+  D:0007H         SYMBOL        len
+  -------         ENDDO         
+  C:0945H         LINE#         5
+  C:0945H         LINE#         6
+  C:0945H         LINE#         10
+  C:0948H         LINE#         11
+  C:095AH         LINE#         12
+  C:0968H         LINE#         14
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        LCD12864
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  C:091AH         PUBLIC        _LCDSetCursor
+  C:08CDH         PUBLIC        _LCDShowCN
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  C:0A0CH         PUBLIC        LCDCancelCursor
+  C:096AH         PUBLIC        _LCDShowStr
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  B:0090H.5       PUBLIC        LCD12864_EN
+  C:09AAH         PUBLIC        LCDClearAll
+  C:084CH         PUBLIC        _LCDShowImage
+  C:09C9H         PUBLIC        _LCDWriteData
+  B:0090H.0       PUBLIC        LCD12864_RS
+  C:09D9H         PUBLIC        LCDWaitReady
+  B:0090H.1       PUBLIC        LCD12864_RW
+  D:00C8H         PUBLIC        T2CON
+  C:098CH         PUBLIC        InitLCD12864
+  C:09EBH         PUBLIC        _LCDWriteCmd
+  C:0A07H         PUBLIC        LCDShowCursor
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          LCDWAITREADY
+  -------         DO            
+  D:0007H         SYMBOL        tmp
+  -------         ENDDO         
+  C:09D9H         LINE#         6
+  C:09D9H         LINE#         7
+  C:09D9H         LINE#         8
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:21:48  PAGE 4
+
+
+  C:09D9H         LINE#         10
+  C:09DBH         LINE#         11
+  C:09DDH         LINE#         12
+  C:09DDH         LINE#         13
+  C:09DFH         LINE#         14
+  C:09E4H         LINE#         15
+  C:09E6H         LINE#         16
+  C:09E8H         LINE#         17
+  C:09EAH         LINE#         18
+  -------         ENDPROC       LCDWAITREADY
+  -------         PROC          _LCDWRITECMD
+  D:0006H         SYMBOL        cmd
+  C:09EBH         LINE#         20
+  C:09EDH         LINE#         21
+  C:09EDH         LINE#         22
+  C:09F0H         LINE#         23
+  C:09F2H         LINE#         24
+  C:09F4H         LINE#         25
+  C:09F6H         LINE#         26
+  C:09F8H         LINE#         27
+  C:09FAH         LINE#         28
+  -------         ENDPROC       _LCDWRITECMD
+  C:09C3H         SYMBOL        L?0045
+  -------         PROC          L?0044
+  -------         ENDPROC       L?0044
+  C:09C3H         SYMBOL        L?0045
+  -------         PROC          _LCDWRITEDATA
+  D:0006H         SYMBOL        dat
+  C:09C9H         LINE#         30
+  C:09CBH         LINE#         31
+  C:09CBH         LINE#         32
+  C:09CEH         LINE#         33
+  C:09D0H         LINE#         34
+  C:09D2H         LINE#         35
+  C:09D4H         LINE#         36
+  C:09D6H         LINE#         37
+  C:09D8H         LINE#         38
+  -------         ENDPROC       _LCDWRITEDATA
+  -------         PROC          INITLCD12864
+  C:098CH         LINE#         40
+  C:098CH         LINE#         41
+  C:098CH         LINE#         42
+  C:0991H         LINE#         43
+  C:0996H         LINE#         44
+  C:099BH         LINE#         45
+  -------         ENDPROC       INITLCD12864
+  -------         PROC          _LCDSHOWSTR
+  D:0007H         SYMBOL        x
+  D:0005H         SYMBOL        y
+  D:0033H         SYMBOL        str
+  D:0036H         SYMBOL        strlen
+  C:096AH         LINE#         48
+  C:0970H         LINE#         49
+  C:0970H         LINE#         50
+  C:0973H         LINE#         51
+  C:0973H         LINE#         52
+  C:0982H         LINE#         53
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:21:48  PAGE 5
+
+
+  C:0984H         LINE#         54
+  C:098BH         LINE#         55
+  -------         ENDPROC       _LCDSHOWSTR
+  -------         PROC          _LCDSHOWCN
+  D:0031H         SYMBOL        x
+  D:0032H         SYMBOL        y
+  D:0033H         SYMBOL        str
+  D:0036H         SYMBOL        strlen
+  -------         DO            
+  D:0003H         SYMBOL        msb
+  D:0005H         SYMBOL        lsb
+  -------         ENDDO         
+  C:08CDH         LINE#         57
+  C:08D7H         LINE#         58
+  C:08D7H         LINE#         61
+  C:08E1H         LINE#         62
+  C:08E8H         LINE#         63
+  C:08EAH         LINE#         64
+  C:08F1H         LINE#         65
+  C:08F4H         LINE#         66
+  C:08F6H         LINE#         67
+  C:08F6H         LINE#         68
+  C:0903H         LINE#         69
+  C:0903H         LINE#         70
+  C:0907H         LINE#         71
+  C:090CH         LINE#         72
+  C:0917H         LINE#         73
+  C:0919H         LINE#         74
+  -------         ENDPROC       _LCDSHOWCN
+  -------         PROC          _LCDSETCURSOR
+  D:0006H         SYMBOL        x
+  D:0005H         SYMBOL        y
+  -------         DO            
+  D:0007H         SYMBOL        pos
+  -------         ENDDO         
+  C:091AH         LINE#         76
+  C:091CH         LINE#         77
+  C:091CH         LINE#         78
+  C:091EH         LINE#         80
+  C:092CH         LINE#         81
+  C:092CH         LINE#         82
+  C:092CH         LINE#         83
+  C:0930H         LINE#         84
+  C:0932H         LINE#         85
+  C:0932H         LINE#         86
+  C:0936H         LINE#         87
+  C:0938H         LINE#         88
+  C:0938H         LINE#         89
+  C:093CH         LINE#         90
+  C:093EH         LINE#         91
+  C:093EH         LINE#         92
+  C:0942H         LINE#         93
+  C:0942H         LINE#         94
+  C:0942H         LINE#         95
+  C:0942H         LINE#         96
+  C:0942H         LINE#         97
+  -------         ENDPROC       _LCDSETCURSOR
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:21:48  PAGE 6
+
+
+  -------         PROC          LCDSHOWCURSOR
+  C:0A07H         LINE#         100
+  C:0A07H         LINE#         101
+  C:0A07H         LINE#         102
+  -------         ENDPROC       LCDSHOWCURSOR
+  -------         PROC          LCDCANCELCURSOR
+  C:0A0CH         LINE#         105
+  C:0A0CH         LINE#         106
+  C:0A0CH         LINE#         107
+  -------         ENDPROC       LCDCANCELCURSOR
+  -------         PROC          LCDCLEARALL
+  C:09AAH         LINE#         110
+  C:09AAH         LINE#         111
+  C:09AAH         LINE#         112
+  C:09AFH         LINE#         113
+  C:09B4H         LINE#         114
+  -------         ENDPROC       LCDCLEARALL
+  -------         PROC          _LCDSHOWIMAGE
+  D:000CH         SYMBOL        image
+  -------         DO            
+  D:0004H         SYMBOL        i
+  D:0005H         SYMBOL        j
+  -------         ENDDO         
+  C:084CH         LINE#         117
+  C:0852H         LINE#         118
+  C:0852H         LINE#         121
+  C:0857H         LINE#         122
+  C:085CH         LINE#         123
+  C:085EH         LINE#         124
+  C:0865H         LINE#         125
+  C:086AH         LINE#         126
+  C:086CH         LINE#         127
+  C:086CH         LINE#         128
+  C:087BH         LINE#         129
+  C:088AH         LINE#         130
+  C:088EH         LINE#         131
+  C:0892H         LINE#         133
+  C:0894H         LINE#         134
+  C:089BH         LINE#         135
+  C:08A0H         LINE#         136
+  C:08A2H         LINE#         137
+  C:08A2H         LINE#         138
+  C:08B1H         LINE#         139
+  C:08C0H         LINE#         140
+  C:08C4H         LINE#         141
+  C:08C8H         LINE#         142
+  -------         ENDPROC       _LCDSHOWIMAGE
+  -------         ENDMOD        LCD12864
+
+  -------         MODULE        LUNAR
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  C:05A4H         PUBLIC        ChAnimal
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  C:0352H         PUBLIC        LunarCalendarTable
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:21:48  PAGE 7
+
+
+  C:04DEH         PUBLIC        MonthAdd
+  D:00B8H         PUBLIC        IP
+  C:0003H         PUBLIC        _LunarCalendar
+  C:05BCH         PUBLIC        _GetLunarDate
+  D:0098H         PUBLIC        SCON
+  C:058AH         PUBLIC        ChMonth
+  D:0088H         PUBLIC        TCON
+  B:0020H.0       PUBLIC        animalNewYear
+  D:0008H         PUBLIC        LunarCalendarDay
+  C:050EH         PUBLIC        ChDay
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          _LUNARCALENDAR
+  D:0038H         SYMBOL        year
+  D:0039H         SYMBOL        month
+  D:003AH         SYMBOL        day
+  -------         DO            
+  D:003BH         SYMBOL        Spring_NY
+  D:003DH         SYMBOL        Sun_NY
+  D:003FH         SYMBOL        index
+  D:0040H         SYMBOL        flag
+  D:0041H         SYMBOL        StaticDayCount
+  -------         ENDDO         
+  C:0003H         LINE#         42
+  C:0009H         LINE#         43
+  C:0009H         LINE#         48
+  C:0037H         LINE#         49
+  C:0057H         LINE#         51
+  C:0074H         LINE#         52
+  C:0098H         LINE#         53
+  C:00A5H         LINE#         54
+  C:00ADH         LINE#         59
+  C:00BBH         LINE#         60
+  C:00BBH         LINE#         61
+  C:00BDH         LINE#         62
+  C:00C9H         LINE#         63
+  C:00CCH         LINE#         64
+  C:00CFH         LINE#         65
+  C:00D2H         LINE#         66
+  C:0109H         LINE#         67
+  C:010CH         LINE#         69
+  C:010FH         LINE#         70
+  C:011FH         LINE#         71
+  C:011FH         LINE#         72
+  C:0129H         LINE#         73
+  C:012BH         LINE#         74
+  C:0160H         LINE#         75
+  C:0160H         LINE#         76
+  C:0163H         LINE#         77
+  C:0167H         LINE#         78
+  C:0169H         LINE#         79
+  C:016BH         LINE#         81
+  C:016DH         LINE#         82
+  C:01A5H         LINE#         83
+  C:01ABH         LINE#         85
+  C:01AEH         LINE#         86
+  C:01B1H         LINE#         87
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:21:48  PAGE 8
+
+
+  C:01B3H         LINE#         88
+  C:01B6H         LINE#         90
+  C:01B6H         LINE#         91
+  C:01B8H         LINE#         92
+  C:01C5H         LINE#         93
+  C:01C7H         LINE#         94
+  C:01CAH         LINE#         95
+  C:01F6H         LINE#         96
+  C:01FBH         LINE#         98
+  C:01FEH         LINE#         99
+  C:0201H         LINE#         100
+  C:0238H         LINE#         101
+  C:023BH         LINE#         103
+  C:023EH         LINE#         104
+  C:024EH         LINE#         105
+  C:024EH         LINE#         106
+  C:0258H         LINE#         107
+  C:025AH         LINE#         108
+  C:025EH         LINE#         109
+  C:0260H         LINE#         110
+  C:0295H         LINE#         111
+  C:0298H         LINE#         112
+  C:02D0H         LINE#         113
+  C:02D6H         LINE#         115
+  C:02D9H         LINE#         116
+  C:02DCH         LINE#         117
+  C:02E4H         LINE#         118
+  C:02E4H         LINE#         119
+  C:02F6H         LINE#         120
+  C:0319H         LINE#         121
+  C:034EH         LINE#         122
+  C:0350H         LINE#         124
+  C:0351H         LINE#         125
+  -------         ENDPROC       _LUNARCALENDAR
+  -------         PROC          _GETLUNARDATE
+  D:0031H         SYMBOL        year
+  D:0005H         SYMBOL        month
+  D:0003H         SYMBOL        day
+  D:0034H         SYMBOL        lunarDate
+  -------         DO            
+  D:0037H         SYMBOL        i
+  D:0007H         SYMBOL        aniPos
+  -------         ENDDO         
+  C:05BCH         LINE#         127
+  C:05BEH         LINE#         128
+  C:05BEH         LINE#         129
+  C:05C1H         LINE#         132
+  C:05C6H         LINE#         133
+  C:05C6H         LINE#         134
+  C:05E2H         LINE#         135
+  C:060CH         LINE#         136
+  C:060EH         LINE#         137
+  C:0652H         LINE#         138
+  C:0652H         LINE#         139
+  C:066EH         LINE#         140
+  C:06A1H         LINE#         141
+  C:06D4H         LINE#         142
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:21:48  PAGE 9
+
+
+  C:06E5H         LINE#         143
+  C:06E8H         LINE#         144
+  C:06E8H         LINE#         145
+  C:06E8H         LINE#         146
+  C:06EAH         LINE#         147
+  C:06EDH         LINE#         148
+  C:06EDH         LINE#         149
+  C:06EFH         LINE#         150
+  C:06F1H         LINE#         151
+  C:06F2H         LINE#         152
+  C:06F2H         LINE#         153
+  C:071FH         LINE#         154
+  C:071FH         LINE#         156
+  C:0721H         LINE#         157
+  -------         ENDPROC       _GETLUNARDATE
+  -------         ENDMOD        LUNAR
+
+  -------         MODULE        ?C?CLDPTR
+  C:0722H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?UIDIV
+  C:073BH         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+  -------         MODULE        ?C?ILDPTR
+  C:0790H         PUBLIC        ?C?ILDPTR
+  -------         ENDMOD        ?C?ILDPTR
+
+  -------         MODULE        ?C?ISTOPTR
+  C:07BBH         PUBLIC        ?C?ISTOPTR
+  -------         ENDMOD        ?C?ISTOPTR
+
+  -------         MODULE        ?C?ULCMP
+  C:07E8H         PUBLIC        ?C?ULCMP
+  -------         ENDMOD        ?C?ULCMP
+
+  -------         MODULE        ?C?ULSHR
+  C:07F9H         PUBLIC        ?C?ULSHR
+  -------         ENDMOD        ?C?ULSHR
+
+  -------         MODULE        ?C?SLSHR
+  C:080CH         PUBLIC        ?C?SLSHR
+  -------         ENDMOD        ?C?SLSHR
+
+  -------         MODULE        ?C?LLDCODE
+  C:0820H         PUBLIC        ?C?LLDCODE
+  -------         ENDMOD        ?C?LLDCODE
+
+  -------         MODULE        ?C?LLDCODE0
+  C:0830H         PUBLIC        ?C?LLDCODE0
+  -------         ENDMOD        ?C?LLDCODE0
+
+  -------         MODULE        ?C?OFFXADD
+  C:0840H         PUBLIC        ?C?OFFXADD
+  -------         ENDMOD        ?C?OFFXADD
+
+BL51 BANKED LINKER/LOCATER V6.05                                                      05/28/2017  16:21:48  PAGE 10
+
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCDSHOWCURSOR?LCD12864
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCDCANCELCURSOR?LCD12864
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCDCLEARALL?LCD12864
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_LCDSHOWIMAGE?LCD12864
+
+Program Size: data=49.1 xdata=0 code=2579
+LINK/LOCATE RUN COMPLETE.  4 WARNING(S),  0 ERROR(S)
